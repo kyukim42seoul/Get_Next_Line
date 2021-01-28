@@ -6,7 +6,7 @@
 #    By: kyukim <kyukim@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/29 01:26:48 by kyukim            #+#    #+#              #
-#    Updated: 2021/01/29 01:28:44 by kyukim           ###   ########.fr        #
+#    Updated: 2021/01/29 01:35:53 by kyukim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ OBJECTS =	get_next_line.o \
 
 all : $(NAME)
 
-$(NAME) : $(OBJECTS) libft.h
+$(NAME) : $(OBJECTS) get_next_line.h
 	ar -rc $(NAME) $(OBJECTS)
 
 clean :
