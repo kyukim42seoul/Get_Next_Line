@@ -6,7 +6,7 @@
 /*   By: kyukim <kyukim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 01:26:51 by kyukim            #+#    #+#             */
-/*   Updated: 2021/01/29 03:06:51 by kyukim           ###   ########.fr       */
+/*   Updated: 2021/01/31 18:17:20 by kyukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ int	get_next_line(int fd, char **line)
 		read_size += line_len;
 		if (check_next_line(buf))
 		{
-			merge_line(storage, buf);
+//			merge_line(storage, buf);
 			(storage)++;
 			return (1);
 		}
-		else
-			merge_line(storage, buf);
+//		else
+//			merge_line(storage, buf);
 	}
 	return (read_size);
 }

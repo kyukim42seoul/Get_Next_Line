@@ -6,7 +6,7 @@
 /*   By: kyukim <kyukim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 01:26:59 by kyukim            #+#    #+#             */
-/*   Updated: 2021/01/29 02:34:04 by kyukim           ###   ########.fr       */
+/*   Updated: 2021/01/31 18:16:48 by kyukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 int		get_next_line(int fd, char **line);
 int		gnl_strlen(const char *str);
-void	merge_line(char **dst, const char *src);
+char	*merge_line(char *dst, const char *src);
 int		check_next_line(char *buf);
 
 #endif
