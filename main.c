@@ -8,7 +8,7 @@ int	main()
 {
 	int		fd;
 	int		result;
-	char	**line;
+	char	*line;
 	char	*test_str;
 	char	*buf_1;
 	char	*buf_2;
@@ -19,6 +19,7 @@ int	main()
 	buf_3 = (char *)malloc(sizeof(char) * 10);
 
 	fd = open("Text.txt", O_RDONLY);
+//	*line = (char *)malloc(sizeof(char *))
 
 //	gnl_strlen check / Ok(basic, null, 1 cases)
 /*
@@ -40,6 +41,7 @@ int	main()
 */
 
 //	check while for find \n
+/*
 	while ((result = read(fd, buf_1, 3))) // 파일 전체를 read
 	{
 		if(check_next_line(buf_1))
@@ -49,6 +51,8 @@ int	main()
 		else
 			printf("else : %s\n", buf_1);
 	}
+*/
+	get_next_line(fd, &line);
 	free(buf_1);
 	free(buf_2);
 	free(buf_3);
