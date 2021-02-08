@@ -6,12 +6,37 @@
 /*   By: kyukim <kyukim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 01:26:57 by kyukim            #+#    #+#             */
-/*   Updated: 2021/02/01 22:35:07 by kyukim           ###   ########.fr       */
+/*   Updated: 2021/02/08 23:27:37 by kyukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
+
+char	*gnl_strcut(char *src)
+{
+	char	*new_line;
+	char	*temp;
+	char	*temp2;
+	int		len;
+
+	len = 0;
+	temp = src;
+	if (!src)
+		return (0);
+	while (*temp != '\n' && *temp)
+	{
+		temp++;
+		len++;
+	}
+	new_line = (char *)malloc(sizeof(char) * len + 1);
+	if (!new_line)
+		return (NULL);
+	temp2 = new_line;
+	while (len--)
+		*temp2++ = *src++;
+	*temp2 = '\0';
+	return (new_line);
+}
 
 int		gnl_strlen(char *str)
 {
@@ -21,9 +46,7 @@ int		gnl_strlen(char *str)
 	if (!str)
 		return (0);
 	while (*str++)
-	{
 		len++;
-	}
 	return (len);
 }
 
@@ -31,11 +54,11 @@ char	*merge_line(char *dst, char *src)
 {
 	char		*new_line;
 	char		*temp;
+	int			count;
 
-	if (!dst && !src)	// dst, src 둘 중 하나라도 있으면 있는 하나가 나오도록
-	{
+	count = gnl_strlen(src);
+	if (!dst && !src)
 		return (NULL);
-	}
 	new_line = (char *)malloc(sizeof(char) * (gnl_strlen(dst) + gnl_strlen(src)) + 1);
 	if (!new_line)
 		return (NULL);
@@ -43,40 +66,29 @@ char	*merge_line(char *dst, char *src)
 	if (dst)
 		while (*dst)
 			*temp++ = *dst++;
-	while (*src)
-		*temp++ = *src++;
+	if (src)
+		while (count--)
+			*temp++ = *src++;
 	*temp = '\0';
 	return (new_line);
 }
 
-int		check_next_line(char *buf)
+char	*check_next_line(char *storage)
 {
-	char	*temp;
+	char	*after_next_line;
 
-	temp = buf;
-	while (*temp)
+	after_next_line = storage;
+	if (!storage)
+		return (0);
+	while (*after_next_line)
 	{
-		if (*temp == '\n')
+		if (*after_next_line == '\n')
 		{
-			*temp = '\0';
-			return (1);
+			after_next_line++;
+			return (after_next_line);
 		}
 		else
-			temp++;
+			after_next_line++;
 	}
 	return (0);
 }
-/*
-char	*gnl_strcpy(char *src)
-{
-	char	*temp;
-	char	*result
-
-	temp = ds
-	if (!(dst || src))
-		return (NULL);
-	while (*src)
-		*temp++ = *src++;
-	return (dst);
-}
-*/
