@@ -10,13 +10,13 @@ int	main()
 	int		result;
 	char	*line;
 	char	*test_str;
-	char	*buf_1;
-	char	*buf_2;
-	char	*buf_3;
+//	char	*buf_1;
+//	char	*buf_2;
+//	char	*buf_3;
 
-	buf_1 = (char *)malloc(sizeof(char) * 5);
-	buf_2 = (char *)malloc(sizeof(char) * 3);
-	buf_3 = (char *)malloc(sizeof(char) * 10);
+//	buf_1 = (char *)malloc(sizeof(char) * 5);
+//	buf_2 = (char *)malloc(sizeof(char) * 3);
+//	buf_3 = (char *)malloc(sizeof(char) * 10);
 
 	fd = open("Text.txt", O_RDONLY);
 //	*line = (char *)malloc(sizeof(char *))
@@ -52,9 +52,30 @@ int	main()
 			printf("else : %s\n", buf_1);
 	}
 */
-	get_next_line(fd, &line);
-	free(buf_1);
-	free(buf_2);
-	free(buf_3);
+	result = get_next_line(fd, &line);
+	printf("result : %d\n", result);
+	printf("out : %s\n", line);
+	result = get_next_line(fd, &line);
+	printf("result : %d\n", result);
+	printf("out : %s\n", line);
+	result = get_next_line(fd, &line);
+	printf("result : %d\n", result);
+	printf("out : %s\n", line);
+	result = get_next_line(fd, &line);
+	printf("result : %d\n", result);
+	printf("out : %s\n", line);
+	while (1)
+		;
+
+
+//	fd = 4;
+//	result = get_next_line(fd, &line);
+//	printf("result : %d\n", result);
+//	printf("out : %s\n", line);
+//	get_next_line(fd, &line);
+//	printf("%s\n", line);
+//	free(buf_1);
+//	free(buf_2);
+//	free(buf_3);
 	return (0);
 }

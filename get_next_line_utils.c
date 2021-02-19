@@ -6,11 +6,12 @@
 /*   By: kyukim <kyukim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 01:26:57 by kyukim            #+#    #+#             */
-/*   Updated: 2021/02/08 23:27:37 by kyukim           ###   ########.fr       */
+/*   Updated: 2021/02/19 12:33:55 by kyukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
 char	*gnl_strcut(char *src)
 {
@@ -54,6 +55,7 @@ char	*merge_line(char *dst, char *src)
 {
 	char		*new_line;
 	char		*temp;
+	char		*check;
 	int			count;
 
 	count = gnl_strlen(src);
@@ -64,8 +66,13 @@ char	*merge_line(char *dst, char *src)
 		return (NULL);
 	temp = new_line;
 	if (dst)
+	{
+		check = dst;
 		while (*dst)
 			*temp++ = *dst++;
+		printf("check again : %p\n", check);
+		free(check);
+	}
 	if (src)
 		while (count--)
 			*temp++ = *src++;
