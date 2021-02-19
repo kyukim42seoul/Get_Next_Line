@@ -6,7 +6,7 @@
 /*   By: kyukim <kyukim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 01:26:59 by kyukim            #+#    #+#             */
-/*   Updated: 2021/02/19 12:10:39 by kyukim           ###   ########.fr       */
+/*   Updated: 2021/02/08 22:36:23 by kyukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 2
+#  define BUFFER_SIZE 30
 # endif
 
 int		get_next_line(int fd, char **line);

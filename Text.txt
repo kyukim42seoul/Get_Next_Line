@@ -1,4 +1,2 @@
-abcde
-12345789546
-fghij
-67890
+abcde12345
+fghij67890
