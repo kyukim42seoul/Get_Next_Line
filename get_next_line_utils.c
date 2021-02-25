@@ -6,35 +6,30 @@
 /*   By: kyukim <kyukim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 01:26:57 by kyukim            #+#    #+#             */
-/*   Updated: 2021/02/08 23:27:37 by kyukim           ###   ########.fr       */
+/*   Updated: 2021/02/25 16:13:12 by kyukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*gnl_strcut(char *src)
+char	*gnl_strcut(char *backup, int len)
 {
 	char	*new_line;
 	char	*temp;
-	char	*temp2;
-	int		len;
 
-	len = 0;
-	temp = src;
-	if (!src)
-		return (0);
-	while (*temp != '\n' && *temp)
+	if (!backup)
 	{
-		temp++;
-		len++;
+		new_line = (char *)malloc(sizeof(char));
+		new_line[0] = '\0';
+		return (new_line);
 	}
 	new_line = (char *)malloc(sizeof(char) * len + 1);
 	if (!new_line)
 		return (NULL);
-	temp2 = new_line;
+	temp = new_line;
 	while (len--)
-		*temp2++ = *src++;
-	*temp2 = '\0';
+		*temp++ = *backup++;
+	*temp = '\0';
 	return (new_line);
 }
 
@@ -50,45 +45,40 @@ int		gnl_strlen(char *str)
 	return (len);
 }
 
-char	*merge_line(char *dst, char *src)
+char	*merge_line(char *backup, char *buf, int read_len)
 {
 	char		*new_line;
 	char		*temp;
-	int			count;
 
-	count = gnl_strlen(src);
-	if (!dst && !src)
+	if (!(backup || buf))
 		return (NULL);
-	new_line = (char *)malloc(sizeof(char) * (gnl_strlen(dst) + gnl_strlen(src)) + 1);
+	new_line = (char *)malloc(sizeof(char) * (gnl_strlen(backup) + read_len + 1));
 	if (!new_line)
 		return (NULL);
 	temp = new_line;
-	if (dst)
-		while (*dst)
-			*temp++ = *dst++;
-	if (src)
-		while (count--)
-			*temp++ = *src++;
+	if (backup)
+		while (*backup)
+			*temp++ = *backup++;
+	if (buf)
+		while (*buf)
+			*temp++ = *buf++;
 	*temp = '\0';
 	return (new_line);
 }
 
-char	*check_next_line(char *storage)
+int		check_next_line(char *backup, char **is_next_line)
 {
-	char	*after_next_line;
-
-	after_next_line = storage;
-	if (!storage)
+	if (!backup)
 		return (0);
-	while (*after_next_line)
+	while (*backup)
 	{
-		if (*after_next_line == '\n')
+		if (*backup == '\n')
 		{
-			after_next_line++;
-			return (after_next_line);
+			*is_next_line = backup;
+			return (1);
 		}
 		else
-			after_next_line++;
+			backup++;
 	}
 	return (0);
 }
