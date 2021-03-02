@@ -6,7 +6,7 @@
 /*   By: kyukim <kyukim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 01:26:59 by kyukim            #+#    #+#             */
-/*   Updated: 2021/02/08 22:36:23 by kyukim           ###   ########.fr       */
+/*   Updated: 2021/03/02 17:19:44 by kyukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@
 
 int		get_next_line(int fd, char **line);
 int		gnl_strlen(char *str);
-char	*merge_line(char *dst, char *src);
-char	*check_next_line(char *buf);
-char	*gnl_strcut(char *src);
+int		check_next_line(char *backup, char **is_next_line);
+char	*merge_line(char *backup, char *buf, int read_len);
+char	*gnl_strcut(char *backup, int len);
+int		set_backup(int fd, char *buf, char **backup, char **is_next_line);
+int		set_line_by_cases(char **line, char *is_next_line, char **backup);
 
 #endif
