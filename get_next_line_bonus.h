@@ -6,7 +6,7 @@
 /*   By: kyukim <kyukim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 01:26:59 by kyukim            #+#    #+#             */
-/*   Updated: 2021/03/03 19:27:04 by kyukim           ###   ########.fr       */
+/*   Updated: 2021/03/03 19:47:47 by kyukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <limits.h>
+
+# ifndef OPEN_MAX
+#  define OPEN_MAX 256
+# endif
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 30
