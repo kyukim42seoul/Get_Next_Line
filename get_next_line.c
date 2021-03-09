@@ -6,7 +6,7 @@
 /*   By: kyukim <kyukim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 01:26:51 by kyukim            #+#    #+#             */
-/*   Updated: 2021/03/03 20:24:37 by kyukim           ###   ########.fr       */
+/*   Updated: 2021/03/09 14:16:16 by kyukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	set_backup(int fd, char *buf, char **backup, char **is_next_line)
 		{
 			buf[read_len] = '\0';
 			temp = merge_line(*backup, buf, read_len);
+			if (!temp)
+				return (-1);
 			free(*backup);
 			*backup = temp;
 		}
@@ -50,13 +52,19 @@ int	set_line_by_cases(char **line, char *is_next_line, char **backup)
 	{
 		temp = *backup;
 		*line = gnl_strcut(*backup, (is_next_line - *backup));
+		if (!*line)
+			return (-1);
 		*backup = gnl_strcut((is_next_line + 1), gnl_strlen(is_next_line));
+		if (!*backup)
+			return (-1);
 		free(temp);
 		return (1);
 	}
 	else
 	{
 		*line = gnl_strcut(*backup, gnl_strlen(*backup));
+		if (!*line)
+			return (-1);
 		free(*backup);
 		*backup = 0;
 		return (0);
@@ -73,7 +81,8 @@ int	get_next_line(int fd, char **line)
 	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE <= 0 || line == 0)
 		return (-1);
 	is_next_line = 0;
-	if (!(buf = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1)))
+	buf = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
+	if (!buf)
 		return (-1);
 	if (set_backup(fd, buf, &backup[fd], &is_next_line) < 0)
 		return (-1);
