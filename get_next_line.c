@@ -6,7 +6,7 @@
 /*   By: kyukim <kyukim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 01:26:51 by kyukim            #+#    #+#             */
-/*   Updated: 2021/03/09 14:16:16 by kyukim           ###   ########.fr       */
+/*   Updated: 2021/03/10 11:41:21 by kyukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	set_backup(int fd, char *buf, char **backup, char **is_next_line)
 		read_len = read(fd, buf, BUFFER_SIZE);
 		if (read_len < 0)
 		{
-			free(buf);
+//			free(buf);
 			return (-1);
 		}
 		else if (read_len == 0)
@@ -39,7 +39,7 @@ int	set_backup(int fd, char *buf, char **backup, char **is_next_line)
 			*backup = temp;
 		}
 	}
-	free(buf);
+//	free(buf);
 	return (1);
 }
 
@@ -50,14 +50,14 @@ int	set_line_by_cases(char **line, char *is_next_line, char **backup)
 	temp = 0;
 	if (is_next_line)
 	{
-		temp = *backup;
 		*line = gnl_strcut(*backup, (is_next_line - *backup));
 		if (!*line)
 			return (-1);
-		*backup = gnl_strcut((is_next_line + 1), gnl_strlen(is_next_line));
-		if (!*backup)
+		temp = gnl_strcut((is_next_line + 1), gnl_strlen(is_next_line));
+		if (!temp)
 			return (-1);
-		free(temp);
+		free(*backup);
+		*backup = temp;
 		return (1);
 	}
 	else
@@ -85,7 +85,11 @@ int	get_next_line(int fd, char **line)
 	if (!buf)
 		return (-1);
 	if (set_backup(fd, buf, &backup[fd], &is_next_line) < 0)
+	{
+		free(buf);
 		return (-1);
+	}
+	free(buf);
 	result = set_line_by_cases(line, is_next_line, &backup[fd]);
 	return (result);
 }
