@@ -6,7 +6,7 @@
 /*   By: kyukim <kyukim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 01:26:57 by kyukim            #+#    #+#             */
-/*   Updated: 2021/03/03 20:26:57 by kyukim           ###   ########.fr       */
+/*   Updated: 2021/08/20 10:15:34 by kyukim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*gnl_strcut(char *backup, int len)
 	return (new_line);
 }
 
-int		gnl_strlen(char *str)
+int	gnl_strlen(char *str)
 {
 	int		len;
 
@@ -53,7 +53,7 @@ char	*merge_line(char *backup, char *buf, int read_len)
 	if (!(backup || buf))
 		return (NULL);
 	new_line = (char *)malloc(sizeof(char)
-	* (gnl_strlen(backup) + read_len + 1));
+			* (gnl_strlen(backup) + read_len + 1));
 	if (!new_line)
 		return (NULL);
 	temp = new_line;
@@ -67,7 +67,7 @@ char	*merge_line(char *backup, char *buf, int read_len)
 	return (new_line);
 }
 
-int		check_next_line(char *backup, char **is_next_line)
+int	check_next_line(char *backup, char **is_next_line)
 {
 	if (!backup)
 		return (0);
